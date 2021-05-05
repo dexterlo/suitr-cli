@@ -19,8 +19,26 @@ const possibleRoutes = [];
 // uses "backtracking" algorithm
 const generatePossibleRoutes = function(routeSoFar, remainingAssignments) {
   if (routeSoFar.length == maxRouteLength) {
-    if (!possibleRoutes.find(e => arraysAreEqual(e, routeSoFar))) {
-      possibleRoutes.push(routeSoFar.concat()); 
+
+    // dedupe off of index-mappings array
+    if (!possibleRoutes.find(e => arraysAreEqual(e.mappings, routeSoFar))) {
+      
+      // create a route object to hold properties
+      let finalizedRoute = {};
+
+      // keep mappings arrays to make deduping easier
+      finalizedRoute.mappings = routeSoFar.concat();
+
+      // fill out the elements with driver/destination info
+      finalizedRoute.assignments = routeSoFar.map(obj => {
+          let a = {};
+          a.driver = drivers[obj[0]];
+          a.destination = destinations[obj[1]];
+          a.suitability = 100;
+          return a;
+        });
+
+      possibleRoutes.push(finalizedRoute); 
     }
     return;
   }
@@ -45,4 +63,7 @@ const generatePossibleRoutes = function(routeSoFar, remainingAssignments) {
 };
 
 generatePossibleRoutes([], possibleAssignments);
-console.log(possibleRoutes);
+
+for (let i = 0; i < possibleRoutes.length; i++) {
+  console.log(possibleRoutes[i].assignments);
+}
