@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 import { fileToArray } from './file-utils.js';
-import { getCombinations } from "./math-utils.js";
+import { getCombinations, arraysAreEqual } from "./math-utils.js";
 
 // read files
 const fileArgs = process.argv.slice(2);
@@ -19,7 +19,7 @@ const possibleRoutes = [];
 // uses "backtracking" algorithm
 const generatePossibleRoutes = function(routeSoFar, remainingAssignments) {
   if (routeSoFar.length == maxRouteLength) {
-    if (!possibleRoutes.find(e => e == routeSoFar)) {
+    if (!possibleRoutes.find(e => arraysAreEqual(e, routeSoFar))) {
       possibleRoutes.push(routeSoFar.concat()); 
     }
     return;
