@@ -38,6 +38,11 @@ const generatePossibleRoutes = function(routeSoFar, remainingAssignments) {
           a.suitability = getSuitabilityScore(a.destination, a.driver);
           return a;
         });
+      
+      // cheat by adding this sum to the parent route object
+      // to avoid having to calculate on the fly later
+      finalizedRoute.totalScore = finalizedRoute.assignments.reduce(
+        (res, currObj) => {return res + currObj.suitability}, 0);
 
       possibleRoutes.push(finalizedRoute); 
     }
@@ -67,4 +72,5 @@ generatePossibleRoutes([], possibleAssignments);
 
 for (let i = 0; i < possibleRoutes.length; i++) {
   console.log(possibleRoutes[i].assignments);
+  console.log('\ntotal route score: ' + possibleRoutes[i].totalScore + '\n');
 }
