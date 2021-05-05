@@ -23,7 +23,28 @@ export const arraysAreEqual = (arr1, arr2) => {
   return true;
 }
 
+// Checks if 2 numbers share any common multiplication factors (other than 1)
+export const sharesCommonFactors = function (num1, num2) {
+  let factors1 = getAllFactors(num1).slice(1);
+  let factors2 = getAllFactors(num2).slice(1);
+  let intersection = factors1.filter(n => factors2.includes(n));
+  return intersection.length > 0;
+}
+
+// Returns all multiplication factors for a given integer
+export const getAllFactors = function (num) {
+  let factors = [];
+  for (let i = 1; i <= num; i++) {
+    if (num % i == 0) {
+      factors.push(i);
+    }
+  }
+  return factors;
+}
+
 export default {
   getCombinations,
-  arraysAreEqual
+  arraysAreEqual,
+  sharesCommonFactors,
+  getAllFactors
 };

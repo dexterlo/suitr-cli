@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 import { fileToArray } from './file-utils.js';
 import { getCombinations, arraysAreEqual } from "./math-utils.js";
+import { getSuitabilityScore } from './suitability-score.js';
 
 // read files
 const fileArgs = process.argv.slice(2);
@@ -34,7 +35,7 @@ const generatePossibleRoutes = function(routeSoFar, remainingAssignments) {
           let a = {};
           a.driver = drivers[obj[0]];
           a.destination = destinations[obj[1]];
-          a.suitability = 100;
+          a.suitability = getSuitabilityScore(a.destination, a.driver);
           return a;
         });
 
