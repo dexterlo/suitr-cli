@@ -70,7 +70,16 @@ const generatePossibleRoutes = function(routeSoFar, remainingAssignments) {
 
 generatePossibleRoutes([], possibleAssignments);
 
+// get the highest scoring route
+// this doesn't really take into account that multiple routes could have same score
+let maxScore = 0, bestRoute = null;
 for (let i = 0; i < possibleRoutes.length; i++) {
-  console.log(possibleRoutes[i].assignments);
-  console.log('\ntotal route score: ' + possibleRoutes[i].totalScore + '\n');
+  if (possibleRoutes[i].totalScore > maxScore) {
+    bestRoute = possibleRoutes[i];
+    maxScore = bestRoute.totalScore;
+  }
 }
+
+// print result
+console.log("\nHighest Route Score: " + bestRoute.totalScore + "\n");
+console.log(bestRoute.assignments);
