@@ -1,0 +1,14 @@
+{
+  "name": "suitr-cli",
+  "version": "1.0.0",
+  "description": "CLI tool that assigns drivers to shipment destinations by suitability score",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "CLI"
+  ],
+  "author": "Dexter Lo",
+  "license": "UNLICENSED"
+}
